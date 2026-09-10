@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#073b4c">
-  <meta name="description" content="Dos planes para Joel: Nápoles o Sorrento, con itinerario, fotos, mapa y ubicación en vivo.">
-  <title>Mañana: Nápoles o Sorrento · Tour de Joel</title>
+  <meta name="description" content="Tres recorridos para Joel: Capri, Nápoles y Sorrento, con itinerarios, fotos, mapas y ubicación en vivo.">
+  <title>Capri, Nápoles o Sorrento · Tour de Joel</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <style>
@@ -29,7 +29,7 @@
     .pill{padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);font-weight:800;font-size:.82rem}
     .pill.warning{background:var(--sun);color:#332300}
     .tabs-shell{position:sticky;top:0;z-index:800;background:rgba(246,241,231,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(22,49,58,.09)}
-    .tabs{max-width:1100px;margin:auto;padding:10px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .tabs{max-width:1100px;margin:auto;padding:10px 14px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
     .tab{background:#e8ece9;color:var(--muted);padding:12px 14px;border-radius:14px;transition:.2s ease;min-height:48px}
     .tab[aria-selected="true"]{background:var(--ink);color:white;box-shadow:0 5px 14px rgba(22,49,58,.24)}
     .tab small{display:block;font-size:.68rem;opacity:.72;font-weight:750;margin-top:1px}
@@ -118,11 +118,11 @@
 <body>
   <header>
     <div class="hero">
-      <div class="eyebrow">Viernes 11 + sábado 12 de septiembre</div>
+      <div class="eyebrow">10–12 de septiembre · Campania</div>
       <h1>Elegí tu próximo capítulo</h1>
-      <p>Dos rutas completas desde Sorrento. Nápoles para ganarle a la lluvia con historia y caos; Sorrento para cerrar el viaje sin convertirlo en una misión militar.</p>
+      <p>Tres recorridos guardados: Capri con su carrera contra el ferry, Nápoles para ganarle a la lluvia y Sorrento para cerrar el viaje sin convertirlo en una misión militar.</p>
       <div class="status">
-        <span class="pill">🗺 2 recorridos</span>
+        <span class="pill">🗺 3 recorridos</span>
         <span class="pill">📍 GPS en vivo</span>
         <span class="pill">🎧 Mini free tour</span>
         <span class="pill warning">⛈ Revisar tormentas al salir</span>
@@ -132,6 +132,7 @@
 
   <nav class="tabs-shell" aria-label="Elegir destino">
     <div class="tabs" role="tablist">
+      <button class="tab" id="tab-capri" role="tab" aria-controls="capri" aria-selected="false" data-city="capri">🏝 Capri<small>tour guardado · 6 h 42</small></button>
       <button class="tab" id="tab-napoli" role="tab" aria-controls="napoli" aria-selected="true" data-city="napoli">🌋 Nápoles<small>día intenso · más interiores</small></button>
       <button class="tab" id="tab-sorrento" role="tab" aria-controls="sorrento" aria-selected="false" data-city="sorrento">🍋 Sorrento<small>día simple · cero logística</small></button>
     </div>
@@ -379,6 +380,186 @@
       </div>
     </section>
 
+    <section class="panel" id="capri" role="tabpanel" aria-labelledby="tab-capri" hidden>
+      <div class="city-head">
+        <div>
+          <div class="city-kicker">Ruta guardada · jueves 10</div>
+          <h2>Capri sin correr</h2>
+        </div>
+        <p>Del cafecito de las 10:43 al ferry de las 17:25. El recorrido prioriza vistas, Monte Solaro y margen real para llegar al puerto.</p>
+      </div>
+
+      <div class="decision">
+        <div class="stat"><small>Duración</small><b>6 h 42 min</b></div>
+        <div class="stat"><small>Movimiento</small><b>Caminata + bus</b></div>
+        <div class="stat"><small>Hora sagrada</small><b>Puerto 16:50</b></div>
+      </div>
+
+      <div class="alert">
+        <strong>Regla de oro</strong>
+        Si a las 15:45 seguís en Anacapri esperando el bus, tomá taxi directo a Marina Grande. El ferry no negocia.
+      </div>
+
+      <div class="layout">
+        <div class="map-column">
+          <section class="map-wrap">
+            <div class="map-title"><span>Tu recorrido en Capri</span><span class="legend"><b class="walk">— a pie</b> · <b class="ride">- - transporte</b></span></div>
+            <div class="map" id="map-capri"></div>
+            <button class="locate" data-locate="capri">◎ Mi ubicación</button>
+          </section>
+        </div>
+
+        <section class="timeline" data-timeline="capri">
+          <article class="stop" data-id="1">
+            <div class="num">1</div>
+            <div class="content">
+              <div class="time">10:50–11:20 · a pie</div>
+              <h3>Giardini di Augusto</h3>
+              <p>Vistas de los Faraglioni y Via Krupp. Mirá desde arriba; hoy no bajes hacia Marina Piccola.</p>
+              <details class="guide">
+                <summary>🎧 Qué poronga estás viendo</summary>
+                <div class="guide-body">
+                  <p><b>La postal:</b> desde estas terrazas tenés juntos los Faraglioni, Marina Piccola y el zigzag imposible de Via Krupp.</p>
+                  <p class="twist"><b>🌀 Plot twist:</b> los “Jardines de Augusto” no los hizo Augusto. Los creó hacia 1900 el magnate alemán del acero Friedrich Alfred Krupp y se llamaron Jardines de Krupp hasta que, después de la Primera Guerra Mundial, el nombre alemán quedó políticamente incómodo. Via Krupp era su atajo privado hacia el barco que tenía en Marina Piccola; su temporada caprese terminó con un escándalo sexual y la expulsión de Italia.</p>
+                  <p class="crossover"><b>🔀 Crossover imperial:</b> Augusto sí amaba Capri: entregó Ischia, mucho más grande, a cambio de esta isla. El primer emperador romano también compraba por vista, no por metros cuadrados.</p>
+                </div>
+              </details>
+              <div class="actions">
+                <a class="btn gmaps" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=40.548151,14.242986&amp;travelmode=walking">Navegar</a>
+                <button class="done">✓ Listo</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="stop" data-id="2">
+            <div class="num">2</div>
+            <div class="content">
+              <div class="time">11:20–12:10 · a pie</div>
+              <h3>Via Camerelle + Tragara</h3>
+              <p>Paseo por la calle más linda hasta el belvedere frente a los Faraglioni. Fotos y vuelta.</p>
+              <details class="guide">
+                <summary>🎧 Lujo arriba, Roma abajo</summary>
+                <div class="guide-body">
+                  <p><b>Via Camerelle:</b> hoy es una pasarela de boutiques, pero su nombre viene de unas cuarenta “camerelle”: cámaras y cisternas romanas que sostenían la antigua vía hacia la villa imperial de Tragara. Básicamente, Gucci montado sobre ingeniería hidráulica de hace dos mil años.</p>
+                  <p class="twist"><b>🦎 Los tres gigantes:</b> los Faraglioni no son piedras random. Stella sigue unida a la isla; Mezzo es el del arco; Scopolo o Fuori es el de afuera y tiene su propia lagartija azul, aislada y adaptada a vivir en esa roca.</p>
+                  <p class="crossover"><b>🎬 Crossover cine–fascismo:</b> si alcanzás a ver un bloque rojo solitario sobre el acantilado oriental, es Casa Malaparte. La imaginó un escritor que pasó de fascista a perseguido por Mussolini y terminó convertida en ícono de arquitectura y escenario de <i>Le Mépris</i>, con Brigitte Bardot.</p>
+                </div>
+              </details>
+              <div class="actions">
+                <a class="btn gmaps" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=40.544704,14.249226&amp;travelmode=walking">Navegar</a>
+                <button class="done">✓ Listo</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="stop ride" data-id="3">
+            <div class="num">3</div>
+            <div class="content">
+              <div class="time">12:10–12:50 · bus</div>
+              <h3>Capri → Anacapri</h3>
+              <p>Volvé a la terminal de Via Roma. Si la cola es absurda, compartí taxi.</p>
+              <details class="guide">
+                <summary>🎧 La otra Capri, literalmente arriba</summary>
+                <div class="guide-body">
+                  <p><b>No cambiás de isla:</b> Anacapri es el otro municipio. El prefijo griego <i>aná</i> significa “arriba”: Capri abajo y Anacapri arriba, dos pueblos apilados que todavía conservan identidades distintas.</p>
+                  <p class="twist"><b>🌀 Plot twist arqueológico:</b> durante siglos se subía por la Scala Fenicia: 921 escalones tallados por colonos griegos en los siglos VII–VI a. C. “Fenicia” es un nombre inventado mucho después, cuando en el siglo XVII se puso de moda encontrar fenicios hasta abajo de la cama.</p>
+                  <p class="crossover"><b>🦵 Crossover Positano:</b> si aquellas escaleras te parecieron violencia urbana, acá fueron la conexión principal hasta que abrieron la carretera en 1877. Por esos escalones se cargaban incluso materiales de construcción.</p>
+                </div>
+              </details>
+              <div class="actions">
+                <a class="btn gmaps" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=40.550149,14.240886&amp;destination=40.555067,14.222121&amp;travelmode=transit">Ver trayecto</a>
+                <button class="done">✓ Listo</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="stop" data-id="4">
+            <div class="num">4</div>
+            <div class="content">
+              <div class="time">13:00–13:35 · rápido</div>
+              <h3>Almuerzo en Anacapri</h3>
+              <p>Pizza o panino cerca de Piazza Vittoria. Nada de sobremesa romana de tres actos.</p>
+              <details class="guide">
+                <summary>🎧 Comer caprese sin caer en el chamuyo</summary>
+                <div class="guide-body">
+                  <p><b>Si aparecen en el menú:</b> los ravioli capresi son pasta local rellena de queso y mejorana. La torta caprese es chocolate y almendras, húmeda por dentro y sin harina.</p>
+                  <p class="twist"><b>🍰 Plot twist:</b> nadie sabe con certeza quién inventó la torta. La leyenda favorita dice que un pastelero olvidó la harina y creó uno de los errores más rentables de Campania. Historia comprobada: dudosa. Resultado: impecable.</p>
+                  <p class="crossover"><b>🍋 Derby regional:</b> Capri, Sorrento y Amalfi se disputan el origen del limoncello. Después de recorrer las tres, vos ya sos jurado comprado por todas las partes.</p>
+                </div>
+              </details>
+              <div class="actions">
+                <a class="btn gmaps" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=pizza+Piazza+Vittoria+Anacapri">Buscar cerca</a>
+                <button class="done">✓ Listo</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="stop" data-id="5">
+            <div class="num">5</div>
+            <div class="content">
+              <div class="time">13:35–14:50 · seggiovia</div>
+              <h3>Monte Solaro</h3>
+              <p>12 minutos por tramo y 30–40 arriba. La vista grande del día. Si está cubierto, cambiá por Villa San Michele.</p>
+              <details class="guide">
+                <summary>🎧 El techo de Capri</summary>
+                <div class="guide-body">
+                  <p><b>Qué mirás:</b> Monte Solaro es el punto más alto de la isla, a 589 metros. Con aire limpio se abren los golfos de Nápoles y Salerno, la península sorrentina y buena parte del rompecabezas que venís recorriendo.</p>
+                  <p class="twist"><b>🌀 Plot twist:</b> la sillita parece una reliquia de otra civilización, pero nació en 1952 y fue reconstruida por completo en los años noventa. Lo verdaderamente histórico arriba es el Fortino di Bruto, resto de las peleas entre británicos y franceses por Capri durante las guerras napoleónicas.</p>
+                  <p class="crossover"><b>🌋 Crossover Vesubio:</b> si el día está claro, buscá el cono al otro lado del golfo: es el mismo Vesubio que ayer estabas tratando de identificar desde la costa. Ahora tenés la toma aérea del episodio.</p>
+                </div>
+              </details>
+              <div class="actions">
+                <a class="btn gmaps" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=40.555101,14.221856&amp;travelmode=walking">A la entrada</a>
+                <button class="done">✓ Listo</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="stop" data-id="6">
+            <div class="num">6</div>
+            <div class="content">
+              <div class="time">14:50–15:35 · a pie</div>
+              <h3>Centro de Anacapri</h3>
+              <p>Via Giuseppe Orlandi y San Michele. Villa San Michele solo si omitiste Monte Solaro.</p>
+              <details class="guide">
+                <summary>🎧 Un piso que cuenta todo</summary>
+                <div class="guide-body">
+                  <p><b>San Michele:</b> entrá mirando al suelo. La iglesia barroca guarda un enorme pavimento de mayólica de 1761 con Adán y Eva expulsados del Paraíso, rodeados por un bestiario fantástico. La pasarela lateral existe para verlo entero sin caminarle por la cabeza a Adán.</p>
+                  <p class="twist"><b>🇸🇪 Plot twist sueco:</b> Villa San Michele parece una villa romana conservada, pero es la fantasía mediterránea que el médico y escritor sueco Axel Munthe armó desde fines del siglo XIX sobre restos antiguos. Hoy pertenece al Estado sueco.</p>
+                  <p class="crossover"><b>💻 Home office imperial:</b> Tiberio gobernó buena parte del Imperio romano desde Capri a partir del año 26. Dos mil años antes de tu viaje, alguien ya había descubierto que se podía dirigir todo remoto desde una isla bastante más linda que la oficina.</p>
+                </div>
+              </details>
+              <div class="actions">
+                <a class="btn gmaps" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=40.555597,14.225171&amp;travelmode=walking">Navegar</a>
+                <button class="done">✓ Listo</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="stop ride" data-id="7">
+            <div class="num">7</div>
+            <div class="content">
+              <div class="time">15:35–16:15 · bus/taxi</div>
+              <h3>Anacapri → Marina Grande</h3>
+              <p>Tomá el bus que diga Marina Grande. A las 15:45, plan taxi. Llegada objetivo: 16:15.</p>
+              <details class="guide">
+                <summary>🎧 El puerto: salida y final de temporada</summary>
+                <div class="guide-body">
+                  <p><b>Qué estás viendo:</b> Marina Grande fue pueblo pesquero y puerto ya en época romana. Cerca estaba Palazzo a Mare, una residencia imperial: esta costa recibía emperadores mucho antes de recibir ferris llenos de gente con sombrero.</p>
+                  <p class="twist"><b>🌀 Plot twist urbano:</b> hasta 1928 los barcos fondeaban directamente en la bahía; el puerto duro y ordenado que ves hoy es bastante moderno. La postal antigua es el caserío de colores trepando detrás.</p>
+                  <p class="crossover"><b>⛴ Final de temporada:</b> Augusto compró Capri, Tiberio gobernó desde acá, Krupp construyó una ruta privada y vos solo tenés una misión histórica: no perder el ferry de las 17:25.</p>
+                </div>
+              </details>
+              <div class="actions">
+                <a class="btn gmaps" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;origin=40.555067,14.222121&amp;destination=40.556579,14.238449&amp;travelmode=transit">Ver trayecto</a>
+                <button class="done">✓ Listo</button>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </section>
+
     <section class="panel" id="sorrento" role="tabpanel" aria-labelledby="tab-sorrento" hidden>
       <div class="city-head">
         <div>
@@ -613,6 +794,25 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
     const routes={
+      capri:{
+        center:[40.5510,14.2350],
+        points:[
+          {n:0,name:"Piazzetta · inicio",p:[40.550785,14.242671],mode:"walk"},
+          {n:1,name:"Giardini di Augusto",p:[40.548151,14.242986],mode:"walk"},
+          {n:2,name:"Belvedere Tragara",p:[40.544704,14.249226],mode:"walk"},
+          {n:3,name:"Terminal bus Capri",p:[40.550149,14.240886],mode:"ride"},
+          {n:4,name:"Piazza Vittoria · Anacapri",p:[40.555067,14.222121],mode:"ride"},
+          {n:5,name:"Monte Solaro",p:[40.545341,14.222716],mode:"walk"},
+          {n:6,name:"San Michele · Anacapri",p:[40.555597,14.225171],mode:"walk"},
+          {n:7,name:"Marina Grande · ferry",p:[40.556579,14.238449],mode:"ride"}
+        ],
+        lines:[
+          {mode:"walk",indexes:[0,1,2,3]},
+          {mode:"ride",indexes:[3,4]},
+          {mode:"walk",indexes:[4,5,4,6]},
+          {mode:"ride",indexes:[6,7]}
+        ]
+      },
       napoli:{
         center:[40.8468,14.2560],
         points:[
@@ -687,6 +887,7 @@
       maps[city]=map;
     }
 
+    createMap("capri");
     createMap("napoli");
     createMap("sorrento");
 
@@ -697,7 +898,10 @@
     function activate(city,save){
       tabs.forEach(function(tab){tab.setAttribute("aria-selected",String(tab.dataset.city===city))});
       panels.forEach(function(panel){panel.hidden=panel.id!==city});
-      if(city==="napoli"){
+      if(city==="capri"){
+        quick.href="https://www.google.com/maps/dir/?api=1&destination=40.556579,14.238449&travelmode=transit";
+        quick.innerHTML="<span>⛴ Ir al puerto ahora<br><small>Marina Grande · ferry 17:25</small></span>";
+      }else if(city==="napoli"){
         quick.href="https://www.google.com/maps/dir/?api=1&destination=Napoli+Piazza+Garibaldi&travelmode=transit";
         quick.innerHTML="<span>🚆 Volver a la estación<br><small>Napoli Garibaldi · objetivo 18:15</small></span>";
       }else{
@@ -719,9 +923,11 @@
       tab.addEventListener("keydown",function(event){
         if(event.key!=="ArrowLeft"&&event.key!=="ArrowRight")return;
         event.preventDefault();
-        const next=tab.dataset.city==="napoli"?"sorrento":"napoli";
-        document.querySelector('[data-city="'+next+'"]').focus();
-        activate(next,true);
+        const current=tabs.indexOf(tab);
+        const direction=event.key==="ArrowRight"?1:-1;
+        const nextTab=tabs[(current+direction+tabs.length)%tabs.length];
+        nextTab.focus();
+        activate(nextTab.dataset.city,true);
       });
     });
 
@@ -750,7 +956,7 @@
     document.querySelectorAll(".done").forEach(function(button){
       const stop=button.closest(".stop");
       const city=button.closest("[data-timeline]").dataset.timeline;
-      const key="tour-"+city+"-"+stop.dataset.id;
+      const key=city==="capri"?"capri-"+stop.dataset.id:"tour-"+city+"-"+stop.dataset.id;
       if(localStorage.getItem(key)==="1"){
         stop.classList.add("checked");
         button.textContent="↩ Desmarcar";
@@ -784,7 +990,8 @@
     lightbox.addEventListener("click",function(event){if(event.target===lightbox)closeLightbox()});
     document.addEventListener("keydown",function(event){if(event.key==="Escape"&&!lightbox.hidden)closeLightbox()});
 
-    const preferred=location.hash==="#sorrento"?"sorrento":location.hash==="#napoli"?"napoli":localStorage.getItem("tour-active-city")||"napoli";
+    const hashCity=location.hash.replace("#","");
+    const preferred=["capri","napoli","sorrento"].includes(hashCity)?hashCity:localStorage.getItem("tour-active-city")||"napoli";
     activate(preferred,false);
   </script>
 </body>
