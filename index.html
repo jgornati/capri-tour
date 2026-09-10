@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#073b4c">
+  <title>Capri en 6 horas · Tour de Joel</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <style>
+    :root{--ink:#16313a;--sea:#087e8b;--sun:#ffb703;--coral:#e85d4a;--paper:#f6f1e7;--card:#fffdf8;--muted:#66777d;--shadow:0 10px 28px rgba(18,48,57,.12)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:ui-rounded,"SF Pro Rounded",Inter,system-ui,sans-serif;line-height:1.42}
+    header{padding:calc(20px + env(safe-area-inset-top)) 20px 18px;background:linear-gradient(145deg,#073b4c,#087e8b);color:white;position:relative;overflow:hidden}
+    header:after{content:"";position:absolute;width:190px;height:190px;border:45px solid rgba(255,255,255,.08);border-radius:50%;right:-90px;top:-95px}
+    .eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;opacity:.82}.hero{max-width:1000px;margin:auto}.hero h1{margin:.25rem 0 0;font-size:clamp(2rem,8vw,4rem);line-height:1}.hero p{margin:.55rem 0 0;max-width:630px;opacity:.92}
+    .status{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);font-weight:750;font-size:.86rem}.pill.deadline{background:var(--sun);color:#332300}
+    main{max-width:1000px;margin:auto;padding:16px 14px 90px}.map-wrap{position:relative;background:white;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.map-title{padding:14px 16px 11px;font-weight:850;display:flex;justify-content:space-between;align-items:center}.legend{font-size:.72rem;color:var(--muted);font-weight:650}.walk{color:var(--sea)}.ride{color:var(--coral)}#map{height:min(48vh,430px);min-height:310px}.leaflet-control-attribution{font-size:9px!important}
+    button,.btn{border:0;text-decoration:none;cursor:pointer;font:inherit;font-weight:800;border-radius:12px;padding:10px 13px;display:inline-flex;align-items:center;justify-content:center;gap:6px}.locate{position:absolute;z-index:500;right:12px;bottom:18px;background:white;color:var(--ink);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+    .alert{margin:16px 0;padding:15px 16px;border-radius:16px;background:#fff0cf;border-left:5px solid var(--sun);font-size:.92rem}.alert strong{display:block;margin-bottom:3px}
+    .timeline{display:grid;gap:12px}.stop{display:grid;grid-template-columns:58px 1fr;background:var(--card);border-radius:18px;box-shadow:0 4px 14px rgba(18,48,57,.08);overflow:hidden}.num{display:flex;align-items:center;justify-content:center;font-size:1.35rem;font-weight:950;background:#dff3f1;color:var(--sea)}.stop.ride .num{background:#ffe4dd;color:var(--coral)}.content{padding:14px}.time{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--sea);font-weight:900}.stop.ride .time{color:var(--coral)}h2{font-size:1.1rem;margin:2px 0 5px}.content p{font-size:.88rem;color:var(--muted);margin:0 0 10px}.actions{display:flex;gap:8px;flex-wrap:wrap}.gmaps{background:#e8f3ff;color:#1769aa}.done{background:#e7f5e9;color:#286b36}.stop.checked{opacity:.55}.stop.checked .num{background:#d9dedc;color:#62706b}
+    .panic{position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));left:14px;right:14px;z-index:900;max-width:972px;margin:auto;background:var(--coral);color:white;box-shadow:0 8px 25px rgba(126,33,20,.35);padding:13px 16px}.panic small{font-weight:650;opacity:.88}.marker{width:28px;height:28px;border-radius:50% 50% 50% 0;background:var(--sea);color:#fff;transform:rotate(-45deg);display:grid;place-items:center;border:2px solid white;box-shadow:0 2px 7px #0006}.marker span{transform:rotate(45deg);font-weight:900;font-size:12px}.marker.ride{background:var(--coral)}
+    @media(min-width:760px){main{padding-top:24px}.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:start}.map-wrap{position:sticky;top:16px}.alert{grid-column:1/-1}.timeline{grid-column:2}.panic{left:auto;width:380px;right:24px}.stop{grid-template-columns:65px 1fr}}
+  </style>
+</head>
+<body>
+  <header><div class="hero"><div class="eyebrow">Jueves 10 de septiembre · Capri</div><h1>Capri sin correr</h1><p>Del cafecito de las 10:43 al ferry de las 17:25. El recorrido prioriza vistas, Monte Solaro y margen para llegar al puerto.</p><div class="status"><span class="pill">⏱ 6 h 42 min</span><span class="pill">🚶 Caminata + bus</span><span class="pill deadline">⛴ Puerto 16:50</span></div></div></header>
+  <main>
+    <div class="layout">
+      <section class="map-wrap"><div class="map-title"><span>Tu recorrido</span><span class="legend"><b class="walk">— a pie</b> · <b class="ride">- - transporte</b></span></div><div id="map"></div><button class="locate" id="locate">◎ Mi ubicación</button></section>
+      <div class="alert"><strong>Regla de oro</strong>Si a las 15:45 seguís en Anacapri esperando el bus, tomá taxi directo a Marina Grande. El ferry no negocia.</div>
+      <section class="timeline" id="timeline">
+        <article class="stop" data-id="1"><div class="num">1</div><div class="content"><div class="time">10:50–11:20 · a pie</div><h2>Giardini di Augusto</h2><p>Vistas de los Faraglioni y Via Krupp. Mirá desde arriba; hoy no bajes hacia Marina Piccola.</p><div class="actions"><a class="btn gmaps" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=40.548151,14.242986&travelmode=walking">Navegar</a><button class="done">✓ Listo</button></div></div></article>
+        <article class="stop" data-id="2"><div class="num">2</div><div class="content"><div class="time">11:20–12:10 · a pie</div><h2>Via Camerelle + Tragara</h2><p>Paseo por la calle más linda hasta el belvedere frente a los Faraglioni. Fotos y vuelta.</p><div class="actions"><a class="btn gmaps" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=40.544704,14.249226&travelmode=walking">Navegar</a><button class="done">✓ Listo</button></div></div></article>
+        <article class="stop ride" data-id="3"><div class="num">3</div><div class="content"><div class="time">12:10–12:50 · bus</div><h2>Capri → Anacapri</h2><p>Volvé a la terminal de Via Roma. Si la cola es absurda, compartí taxi.</p><div class="actions"><a class="btn gmaps" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=40.550149,14.240886&destination=40.555067,14.222121&travelmode=transit">Ver trayecto</a><button class="done">✓ Listo</button></div></div></article>
+        <article class="stop" data-id="4"><div class="num">4</div><div class="content"><div class="time">13:00–13:35 · rápido</div><h2>Almuerzo en Anacapri</h2><p>Pizza o panino cerca de Piazza Vittoria. Nada de sobremesa romana de tres actos.</p><div class="actions"><a class="btn gmaps" target="_blank" href="https://www.google.com/maps/search/?api=1&query=pizza+Piazza+Vittoria+Anacapri">Buscar cerca</a><button class="done">✓ Listo</button></div></div></article>
+        <article class="stop" data-id="5"><div class="num">5</div><div class="content"><div class="time">13:35–14:50 · seggiovia</div><h2>Monte Solaro</h2><p>12 minutos por tramo y 30–40 arriba. La vista grande del día. Si está cubierto, cambiá por Villa San Michele.</p><div class="actions"><a class="btn gmaps" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=40.555101,14.221856&travelmode=walking">A la entrada</a><button class="done">✓ Listo</button></div></div></article>
+        <article class="stop" data-id="6"><div class="num">6</div><div class="content"><div class="time">14:50–15:35 · a pie</div><h2>Centro de Anacapri</h2><p>Via Giuseppe Orlandi y San Michele. Villa San Michele solo si omitiste Monte Solaro.</p><div class="actions"><a class="btn gmaps" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=40.555597,14.225171&travelmode=walking">Navegar</a><button class="done">✓ Listo</button></div></div></article>
+        <article class="stop ride" data-id="7"><div class="num">7</div><div class="content"><div class="time">15:35–16:15 · bus/taxi</div><h2>Anacapri → Marina Grande</h2><p>Tomá el bus que diga Marina Grande. A las 15:45, plan taxi. Llegada objetivo: 16:15.</p><div class="actions"><a class="btn gmaps" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=40.555067,14.222121&destination=40.556579,14.238449&travelmode=transit">Ver trayecto</a><button class="done">✓ Listo</button></div></div></article>
+      </section>
+    </div>
+  </main>
+  <a class="btn panic" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=40.556579,14.238449&travelmode=transit"><span>⛴ Ir al puerto ahora<br><small>Marina Grande · ferry 17:25</small></span></a>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
+    const pts=[
+      {n:0,name:'Piazzetta · inicio',p:[40.550785,14.242671],mode:'walk'},
+      {n:1,name:'Giardini di Augusto',p:[40.548151,14.242986],mode:'walk'},
+      {n:2,name:'Belvedere Tragara',p:[40.544704,14.249226],mode:'walk'},
+      {n:3,name:'Terminal bus Capri',p:[40.550149,14.240886],mode:'ride'},
+      {n:4,name:'Piazza Vittoria · Anacapri',p:[40.555067,14.222121],mode:'ride'},
+      {n:5,name:'Monte Solaro',p:[40.545341,14.222716],mode:'walk'},
+      {n:6,name:'San Michele · Anacapri',p:[40.555597,14.225171],mode:'walk'},
+      {n:7,name:'Marina Grande · ferry',p:[40.556579,14.238449],mode:'ride'}
+    ];
+    const map=L.map('map',{zoomControl:false}).setView([40.551,14.235],14);
+    L.control.zoom({position:'topleft'}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
+    function icon(x){return L.divIcon({className:'',html:`<div class="marker ${x.mode==='ride'?'ride':''}"><span>${x.n||'●'}</span></div>`,iconSize:[28,28],iconAnchor:[14,28]})}
+    pts.forEach(x=>L.marker(x.p,{icon:icon(x)}).addTo(map).bindPopup(`<b>${x.n?x.n+'. ':''}${x.name}</b>`));
+    const walking=[pts[0].p,pts[1].p,pts[2].p,pts[3].p];
+    const ana=[pts[4].p,pts[5].p,pts[4].p,pts[6].p];
+    L.polyline(walking,{color:'#087e8b',weight:5,opacity:.85}).addTo(map);
+    L.polyline(ana,{color:'#087e8b',weight:5,opacity:.85}).addTo(map);
+    L.polyline([pts[3].p,pts[4].p],{color:'#e85d4a',weight:5,dashArray:'7 10'}).addTo(map);
+    L.polyline([pts[6].p,pts[7].p],{color:'#e85d4a',weight:5,dashArray:'7 10'}).addTo(map);
+    map.fitBounds(L.latLngBounds(pts.map(x=>x.p)),{padding:[25,25]});
+    let me;
+    document.getElementById('locate').onclick=()=>navigator.geolocation.getCurrentPosition(pos=>{const p=[pos.coords.latitude,pos.coords.longitude];if(me) me.setLatLng(p);else me=L.circleMarker(p,{radius:9,color:'#fff',weight:3,fillColor:'#1769ff',fillOpacity:1}).addTo(map).bindPopup('Estás acá');map.setView(p,16);},()=>alert('Activá el permiso de ubicación del navegador.'));
+    document.querySelectorAll('.done').forEach(b=>b.onclick=()=>{const s=b.closest('.stop');s.classList.toggle('checked');b.textContent=s.classList.contains('checked')?'↩ Desmarcar':'✓ Listo';localStorage.setItem('capri-'+s.dataset.id,s.classList.contains('checked')?'1':'0')});
+    document.querySelectorAll('.stop').forEach(s=>{if(localStorage.getItem('capri-'+s.dataset.id)==='1'){s.classList.add('checked');s.querySelector('.done').textContent='↩ Desmarcar'}});
+  </script>
+</body>
+</html>
