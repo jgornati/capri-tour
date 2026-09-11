@@ -30,7 +30,7 @@
     .pill.warning{background:var(--sun);color:#332300}
     .tabs-shell{position:sticky;top:0;z-index:800;background:rgba(246,241,231,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(22,49,58,.09)}
     .tabs{max-width:1100px;margin:auto;padding:10px 14px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .tab{background:#e8ece9;color:var(--muted);padding:12px 14px;border-radius:14px;transition:.2s ease;min-height:48px}
+    .tab{display:block;text-align:center;background:#e8ece9;color:var(--muted);padding:12px 14px;border-radius:14px;transition:.2s ease;min-height:48px}
     .tab[aria-selected="true"]{background:var(--ink);color:white;box-shadow:0 5px 14px rgba(22,49,58,.24)}
     .tab small{display:block;font-size:.68rem;opacity:.72;font-weight:750;margin-top:1px}
     main{max-width:1100px;margin:auto;padding:16px 14px 100px}
@@ -101,6 +101,11 @@
     .lightbox-close{position:absolute;right:16px;top:calc(14px + env(safe-area-inset-top));background:white;color:var(--ink);width:44px;height:44px;border-radius:50%;font-size:1.35rem}
     .footer-note{font-size:.72rem;color:var(--muted);text-align:center;margin:22px 10px 0}
     @media(max-width:650px){
+      .tabs{display:flex;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-inline:contain;scrollbar-width:thin;scrollbar-color:var(--coral) transparent;padding-bottom:7px}
+      .tabs::-webkit-scrollbar{height:5px}
+      .tabs::-webkit-scrollbar-track{background:transparent}
+      .tabs::-webkit-scrollbar-thumb{background:var(--coral);border-radius:999px}
+      .tab{flex:0 0 178px;scroll-snap-align:center;white-space:nowrap}
       .gallery{display:flex;height:255px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-left:-14px;margin-right:-14px;padding:0 14px}
       .gallery::-webkit-scrollbar{display:none}
       .shot,.shot:first-child{flex:0 0 84%;grid-row:auto;scroll-snap-align:center}
@@ -164,14 +169,14 @@
       </div>
 
       <div class="decision">
-        <div class="stat"><small>Salida sugerida</small><b>Próximo tren · ideal antes de 10:10</b></div>
+        <div class="stat"><small>Salida real</small><b>10:38 desde Sorrento</b></div>
         <div class="stat"><small>Movimiento</small><b>Tren + metro/funicular + 9 km</b></div>
-        <div class="stat"><small>Regreso objetivo</small><b>20:00 en Garibaldi</b></div>
+        <div class="stat"><small>Regreso objetivo</small><b>20:10 en Garibaldi</b></div>
       </div>
 
       <div class="alert">
         <strong>Regla de oro para hoy</strong>
-        No gastes el sol bajo tierra: priorizá Sant’Elmo y el Lungomare. Llevá agua; si te atrasás, recortá Sansevero o el mural, no el atardecer. Mirá el próximo tren en <a target="_blank" rel="noopener" href="https://www.eavsrl.it/orari-linee-ferroviarie/">EAV</a> antes de salir.
+        Ya estás en viaje. Llegada estimada cerca de las 11:50: priorizá Sant’Elmo y el Lungomare. Si te atrasás, recortá Sansevero o el mural, no el atardecer.
       </div>
 
       <div class="layout">
@@ -187,9 +192,9 @@
           <article class="stop ride" data-id="1">
             <div class="num">1</div>
             <div class="content">
-              <div class="time">09:45–11:15 · próximo Circumvesuviana</div>
+              <div class="time">10:38–11:50 aprox. · Circumvesuviana</div>
               <h3>Sorrento → Napoli</h3>
-              <p>Salí ya y tomá el próximo tren razonable. Bajate en Napoli Garibaldi; mochila adelante, celular tranquilo y nada de viajar como suricato paranoico.</p>
+              <p>Ya estás en camino. Bajate en Napoli Garibaldi; mochila adelante, celular tranquilo y nada de viajar como suricato paranoico.</p>
               <details class="guide">
                 <summary>🎧 La entrada al caos</summary>
                 <div class="guide-body">
@@ -208,7 +213,7 @@
           <article class="stop" data-id="2">
             <div class="num">2</div>
             <div class="content">
-              <div class="time">11:20–11:55 · a pie</div>
+              <div class="time">11:55–12:30 · a pie</div>
               <h3>Duomo + San Gennaro</h3>
               <p>Entrá al Duomo y buscá la Capilla del Tesoro. Es el mejor prólogo para entender que Nápoles negocia hasta con sus santos.</p>
               <details class="guide">
@@ -229,7 +234,7 @@
           <article class="stop" data-id="3">
             <div class="num">3</div>
             <div class="content">
-              <div class="time">11:55–12:30 · a pie</div>
+              <div class="time">12:30–13:00 · a pie</div>
               <h3>Via dei Tribunali + San Gregorio Armeno</h3>
               <p>Metete por el antiguo decumano y desviate por la calle de los pesebres. Hoy conviene mirar Nápoles a cielo abierto, no enterrarte una hora y media.</p>
               <details class="guide">
@@ -251,7 +256,7 @@
           <article class="stop" data-id="4">
             <div class="num">4</div>
             <div class="content">
-              <div class="time">12:30–13:15 · hambre seria</div>
+              <div class="time">13:00–13:45 · hambre seria</div>
               <h3>Pizza sin ceremonia</h3>
               <p>Comé en Di Matteo o donde veas rotación rápida y napolitanos. Pizza fritta o margherita; no reserves una cumbre diplomática para almorzar.</p>
               <details class="guide">
@@ -272,7 +277,7 @@
           <article class="stop" data-id="5">
             <div class="num">5</div>
             <div class="content">
-              <div class="time">13:20–14:00 · solo con entrada</div>
+              <div class="time">13:50–14:25 · solo con entrada</div>
               <h3>Cappella Sansevero</h3>
               <p>Si conseguís ticket, entrá por el Cristo Velado. Si está agotado, seguí directo a Santa Chiara: no pierdas una hora mendigándole a la boletería.</p>
               <details class="guide">
@@ -295,7 +300,7 @@
           <article class="stop" data-id="6">
             <div class="num">6</div>
             <div class="content">
-              <div class="time">14:00–14:50 · a pie</div>
+              <div class="time">14:25–15:10 · a pie</div>
               <h3>Spaccanapoli + Santa Chiara</h3>
               <p>Cruzá el centro por la calle que parece partir Nápoles al medio. Con este sol, el claustro de mayólicas de Santa Chiara pasa de refugio a parada fuerte.</p>
               <details class="guide">
@@ -316,7 +321,7 @@
           <article class="stop" data-id="7">
             <div class="num">7</div>
             <div class="content">
-              <div class="time">15:00–16:00 · a pie</div>
+              <div class="time">15:15–16:10 · a pie</div>
               <h3>Toledo + Quartieri + Maradona</h3>
               <p>Entrá a la estación Toledo aunque uses el metro una sola parada. Después subí un poco por los Quartieri y asomate al mural de Maradona.</p>
               <details class="guide">
@@ -338,7 +343,7 @@
           <article class="stop ride" data-id="8">
             <div class="num">8</div>
             <div class="content">
-              <div class="time">16:10–17:35 · funicular + mirador</div>
+              <div class="time">16:15–17:40 · funicular + mirador</div>
               <h3>Castel Sant’Elmo</h3>
               <p>Bajá hasta Augusteo, subí en la Funicolare Centrale hasta Piazza Fuga y caminá al castillo. Esta es la mejora importante del plan: Nápoles, Vesubio y el golfo en una sola toma.</p>
               <details class="guide">
@@ -360,7 +365,7 @@
           <article class="stop ride" data-id="9">
             <div class="num">9</div>
             <div class="content">
-              <div class="time">17:35–18:20 · funicular + a pie</div>
+              <div class="time">17:40–18:25 · funicular + a pie</div>
               <h3>Galleria Umberto + Plebiscito</h3>
               <p>Bajá otra vez en la funicular hasta Augusteo: Galleria, Teatro San Carlo por afuera, Piazza del Plebiscito y Palacio Real quedan pegados.</p>
               <details class="guide">
@@ -381,7 +386,7 @@
           <article class="stop" data-id="10">
             <div class="num">10</div>
             <div class="content">
-              <div class="time">18:20–19:15 · hora dorada</div>
+              <div class="time">18:25–19:20 · hora dorada</div>
               <h3>Lungomare + Castel dell’Ovo</h3>
               <p>Caminá por Santa Lucia hasta el castillo, aunque sea para verlo por afuera. El cierre es Vesubio, mar y luz baja: exactamente lo que el plan de lluvia te estaba robando.</p>
               <details class="guide">
@@ -402,13 +407,13 @@
           <article class="stop ride" data-id="11">
             <div class="num">11</div>
             <div class="content">
-              <div class="time">19:15–20:00 · bus/metro + tren</div>
+              <div class="time">19:20–20:10 · bus/metro</div>
               <h3>Volver a Napoli Garibaldi</h3>
               <p>Volvé hacia Municipio y tomá la Línea 1 hasta Garibaldi; si venís justo o estás fundido, taxi directo. Mirá el próximo tren a Sorrento antes de empezar a volver.</p>
               <details class="guide">
                 <summary>🎧 Evacuación con dignidad</summary>
                 <div class="guide-body">
-                  <p><b>Objetivo:</b> estar en Garibaldi alrededor de las 20:00, con margen para ubicar andén y validar el ticket que corresponda.</p>
+                  <p><b>Objetivo:</b> estar en Garibaldi alrededor de las 20:10, con margen para ubicar andén y validar el ticket que corresponda.</p>
                   <p class="fallback"><b>No negocies:</b> si el recorrido se atrasó, cortá Sansevero o el mural. Nápoles seguirá existiendo; el tren que estás viendo cerrar las puertas no.</p>
                 </div>
               </details>
@@ -825,7 +830,7 @@
   </main>
 
   <a class="btn quick" id="quick" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=Napoli+Piazza+Garibaldi&amp;travelmode=transit">
-    <span>🚆 Volver a la estación<br><small>Napoli Garibaldi · objetivo 20:00</small></span>
+    <span>🚆 Volver a la estación<br><small>Napoli Garibaldi · objetivo 20:10</small></span>
   </a>
 
   <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Foto ampliada">
@@ -943,12 +948,16 @@
     function activate(city,save){
       tabs.forEach(function(tab){tab.setAttribute("aria-selected",String(tab.dataset.city===city))});
       panels.forEach(function(panel){panel.hidden=panel.id!==city});
+      const activeTab=tabs.find(function(tab){return tab.dataset.city===city});
+      if(activeTab&&window.matchMedia("(max-width:650px)").matches){
+        activeTab.parentElement.scrollTo({left:activeTab.offsetLeft-(activeTab.parentElement.clientWidth-activeTab.offsetWidth)/2,behavior:save===false?"auto":"smooth"});
+      }
       if(city==="capri"){
         quick.href="https://www.google.com/maps/dir/?api=1&destination=40.556579,14.238449&travelmode=transit";
         quick.innerHTML="<span>⛴ Ir al puerto ahora<br><small>Marina Grande · ferry 17:25</small></span>";
       }else if(city==="napoli"){
         quick.href="https://www.google.com/maps/dir/?api=1&destination=Napoli+Piazza+Garibaldi&travelmode=transit";
-        quick.innerHTML="<span>🚆 Volver a la estación<br><small>Napoli Garibaldi · objetivo 20:00</small></span>";
+        quick.innerHTML="<span>🚆 Volver a la estación<br><small>Napoli Garibaldi · objetivo 20:10</small></span>";
       }else{
         quick.href="https://www.google.com/maps/dir/?api=1&destination=Corso+Italia+10+Sorrento&travelmode=walking";
         quick.innerHTML="<span>🏠 Volver al alojamiento<br><small>Corso Italia 10 · Sorrento</small></span>";
